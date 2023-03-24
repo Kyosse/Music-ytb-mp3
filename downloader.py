@@ -25,8 +25,6 @@ def is_playlist(url: str) -> list:
         list: List that contain a boolean (True if the video is in a playlist), the video id,
                 and the playlist id if there is one. [Bool, video_id, playlist_id]
     """
-    playlist: bool = None
-    is_playlist_id: str = None
     url_split: list = url.replace('&','|').replace('?', '|').split('|')
     values: list = [False, None, None]
     if len(url_split) == 1:
@@ -141,13 +139,9 @@ if __name__ == "__main__":
     youtube = build('youtube', 'v3', developerKey=api_key)
     
     playlist_id = 'PLAQ9e4hp5ItvgZjsfz0IGtSw-LaW5kUK4'
-    print(is_playlist('https://youtu.be/jJTfV3hON8M'))
-    print(is_playlist("https://www.youtube.com/watch?v=XAAoiV37X7c&list=PLAQ9e4hp5Itu51pM6Qyt-fMfBEsblQhaW&index=11"))
-"""   
     video_ids = get_video_from_playlist(youtube, playlist_id)
     print(*video_ids, sep='\n')
     download_path: str = path_exist()
     for element in video_ids:
         download_video_mp3(element[1], download_path)
     print(path_exist())
-"""
