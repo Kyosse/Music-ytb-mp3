@@ -23,13 +23,26 @@ def is_playlist(url: str) -> list:
 
     Returns:
         list: List that contain a boolean (True if the video is in a playlist), the video id,
-                and the playlist id if there is one. 
+                and the playlist id if there is one. [Bool, video_id, playlist_id]
     """
     playlist: bool = None
-
-    url_split: list = url.split('&')
-
-    return url_split
+    is_playlist_id: str = None
+    url_split: list = url.replace('&','|').replace('?', '|').split('|')
+    values: list = [False, None, None]
+    if len(url_split) == 1:
+        undefined_id = url_split[0].split('/')[-1]
+        if 'PL' in undefined_id:
+            values = [True, None, undefined_id]
+        else:
+            values = [False, undefined_id, None]
+    else:
+        for element in url_split:
+            if 'v=' in element:
+                values[1] = element.lstrip('v=')
+            elif 'list=' in element:
+                values[0] = True
+                values[2] = element.lstrip('list=')
+    return values
 
 def get_video_from_playlist(build: object, playlist_id: str) -> list:
     """Fonction that returns a list with the title and id of each video in the playlist corresponds to the parameter playlist_id.
@@ -128,7 +141,7 @@ if __name__ == "__main__":
     youtube = build('youtube', 'v3', developerKey=api_key)
     
     playlist_id = 'PLAQ9e4hp5ItvgZjsfz0IGtSw-LaW5kUK4'
-
+    print(is_playlist('https://youtu.be/jJTfV3hON8M'))
     print(is_playlist("https://www.youtube.com/watch?v=XAAoiV37X7c&list=PLAQ9e4hp5Itu51pM6Qyt-fMfBEsblQhaW&index=11"))
 """   
     video_ids = get_video_from_playlist(youtube, playlist_id)
