@@ -1,0 +1,49 @@
+{% extends "base.html" %} {% block title %}Profile{% endblock %} {%block content
+%}
+<div class="contenair-fluid p-4 my-4 rounded-3 bg-dark">
+  <h2 class="mb-4 fw-bold text-center text-white h1">
+    <i class="fas fa-user-circle color-icon text-center text-warning"></i>
+    {{ user.pseudo }} Profile
+  </h2>
+  <p class="text-primary">Description</p>
+  <form method="POST" enctype="multipart/form-data">
+    <div class="container mt-3">
+      <p class="mb-4 fw-bold text-white">
+        <i class="fas fa-book-open color-icon text-center text-warning"></i>
+        Upload your own Manga !
+      </p>
+
+      <div class="input-group mb-3">
+        <span class="input-group-text border-0 bg-warning">Title</span>
+        <input
+          type="text"
+          class="form-control border-0 bg-secondary"
+          style="--bs-bg-opacity: 0.3"
+          placeholder="Enter Title"
+          id="title"
+        />
+      </div>
+      <div class="input-group mb-3">
+        <span class="input-group-text border-0 bg-warning">Description</span>
+        <textarea
+          class="form-control border-0 bg-secondary"
+          style="--bs-bg-opacity: 0.3"
+          placeholder="..."
+          id="description"
+        ></textarea>
+      </div>
+      <div class="input-group border-0 mb-3">
+        <input
+          class="form-control border-0 bg-secondary"
+          type="file"
+          id="images"
+          accept=".png,.jpg,.jpeg,.gif"
+          multiple
+        />
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-outline-warning">Upload</button>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content%}
+
+<div class="contenair-fluid shadow-lg bg-dark p-5 my-5 rounded-3 text-white">
+  <h2 class="mb-4 fw-bold text-center">
+    <i class="bi bi-download color-icon text-center text-warning"></i> YTB MP3
+  </h2>
+  <div class="progress" style="height: 20px">
+    <div
+      class="progress-bar shadow-lg bg-warning progress-bar-striped progress-bar-animated"
+      role="progressbar"
+      id="id_progressbar"
+      style="width: 0%"
+      aria-valuenow="0"
+      aria-valuemin="0"
+      aria-valuemax="100"
+    ></div>
+  </div>
+  <form method="POST" id="download-form">
+    <div class="form-group p-3">
+      <div class="url-input">
+        <p class="mb-3 pt-4 fw-bold">Playlist or music URL : </p>
+        <label class="form-label"><i class="bi bi-file-music-fill text-warning"></i> URL : </label>
+        <input class="form-control text-warning" type="text" name="url" id="id-url" placeholder="Youtube URL" onkeyup="progressbarUpdate()"required ><br>
+        <label class="form-label"><i class="bi bi-folder2-open text-warning"></i> Download Location * : </label>
+        <input class="form-control text-warning" type="text" name="location" id="id-location" placeholder="Download Location" onkeyup="progressbarUpdate()" ><br>
+        <span class="form-text pb-2 text-danger" id="location-info">* The format need to be a location from your user file (example: Desktop/random_folder), else it while be download into your Download folder. </span>
+      </div>
+      <div class="position-absolute mt-2 pb-3 pt-5 start-50 translate-middle">
+        <button type="submit" class="btn btn-outline-warning">
+          Download
+        </button>
+      </div>
+    </div>
+  </form>
+  <script>
+    function progressbarUpdate() {
+      let url = document.getElementById('id-url').value;
+      let location = document.getElementById('id-location').value;
+      val = (url.length / 1.5) + (location.length) ;
+      document.getElementById('id_progressbar').style = 'width: '+ val +'%';
+    }
+  </script>
+  {% endblock %}
+</div>

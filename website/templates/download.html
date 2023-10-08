@@ -1,0 +1,25 @@
+{% extends "base.html" %} {% block title %}Maze{% endblock %} {%block content %}
+<div class="contenair-fluid shadow-lg bg-dark p-5 my-4 rounded-3">
+  <div class="text-center">
+  <img
+    class="img-fluid shadow-lg bg-warning rounded-3"
+    src="{{url_for('static',filename = image_labyrinthe)}}"
+    width="60%"
+  />
+</div>
+</br>
+  <a
+    href="{{url_for('static',filename = image_labyrinthe)}}"
+    download="Labyrinthe.svg"
+    class="link-secondary"
+  >
+    Télécharger ton labyrinthe en cliquant ici !!!
+    <i class="fa fa-solid fa-download color-icon text-center text-secondary"></i
+  ></a>
+  <div class="position-absolute pb-3 pt-5 start-50 translate-middle">
+    <button href="/" class="btn btn-outline-warning">
+      <a href="/" class="link-warning">Revenir en arrière</a>
+    </button>
+</div>
+
+{% endblock %}
